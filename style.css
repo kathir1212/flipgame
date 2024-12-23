@@ -64,8 +64,7 @@ font-family: Georgia, 'Times New Roman', Times, serif;
     pointer-events: none;
 }
 .count{
-    display: flex;
-justify-content: space-around;
+   
 margin-bottom: 4%;
 }
 

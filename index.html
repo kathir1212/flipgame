@@ -60,7 +60,7 @@
         count.appendChild(MatchMove);
         const dismatchcounts = document.createElement('div');
         dismatchcounts.className = 'dismatchcounts';
-        dismatchcounts.innerHTML ="Total Moves : 0";
+        dismatchcounts.innerHTML ="MisMatch Moves : 0";
        
         count.appendChild(dismatchcounts);
 
@@ -106,7 +106,7 @@
                                 }
                             } else {
                                 dismatchcount +=1; 
-                                dismatchcounts.innerHTML ="Total Moves" + ":" +  dismatchcount;
+                                dismatchcounts.innerHTML ="MisMatch Moves" + ":" +  dismatchcount;
                                 first.classList.remove('boxOpen');
                                 second.classList.remove('boxOpen');
                             }
