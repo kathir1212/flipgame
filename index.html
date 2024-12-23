@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+
+
+    <script>
+       
+        const numbers = [
+            'assets/download (1).jpg', 'assets/download (2).jpg', 'assets/download (3).jpg', 
+            'assets/download (4).jpg', 'assets/download (7).jpg', 'assets/download.jpg', 
+            'assets/images (1).jpg', 'assets/images.jpg', 'assets/download (1).jpg', 
+            'assets/download (2).jpg', 'assets/download (3).jpg', 'assets/download (4).jpg', 
+            'assets/download (7).jpg', 'assets/download.jpg', 'assets/images (1).jpg', 
+            'assets/images.jpg'
+        ];
+
+        
+        numbers.sort(() => Math.random() - 0.5);
+        const whole = document.createElement('div');
+        document.body.appendChild(whole);
+        const fliptitreset = document.createElement('div');
+        whole.appendChild(fliptitreset);
+        const fliptitle = document.createElement('div');
+        fliptitle.className = 'title';
+
+        fliptitreset.appendChild(fliptitle);
+
+        const reset = document.createElement('button');
+        reset.onclick = function () {
+        window.location.reload();
+        }
+
+    
+        reset.innerHTML = 'Restart';
+        
+        fliptitle.innerHTML = 'FLIP CARD GAME';
+
+        fliptitreset.appendChild(reset);
+
+
+
+        const count = document.createElement('div');
+        whole.appendChild(count);
+
+        const flipboard = document.createElement('div');
+        const MatchMove = document.createElement('div');
+        MatchMove.className = 'title';
+        count.className = 'count';
+        fliptitreset.className = 'fliptitleandreset'
+        MatchMove.innerHTML = 'Match Move : 0'
+       
+        count.appendChild(MatchMove);
+        const dismatchcounts = document.createElement('div');
+        dismatchcounts.className = 'dismatchcounts';
+        dismatchcounts.innerHTML ="Total Moves : 0";
+       
+        count.appendChild(dismatchcounts);
+
+        
+
+        flipboard.className = 'board';
+        whole.appendChild(flipboard);
+
+        let openBoxes = [];
+        let matchedCount = 0;
+       var  matchedCountMove = 0;
+       var dismatchcount = 0;
+
+
+        numbers.forEach((number) => {
+            const box = document.createElement('div');
+            const image = document.createElement('img');
+            box.className = 'item';
+            box.dataset.value = number;
+            image.src = number;
+            box.appendChild(image);
+
+            
+            box.onclick = function () {
+                if (openBoxes.length < 2 && !box.classList.contains('boxOpen')) {
+                    box.classList.add('boxOpen');
+                    openBoxes.push(box);
+
+                    if (openBoxes.length === 2) {
+                        setTimeout(() => {
+                            const [first, second] = openBoxes;
+
+                            if (first.dataset.value === second.dataset.value) {
+                                first.classList.add('boxMatch');
+                                second.classList.add('boxMatch');
+                                matchedCount += 2;
+                                matchedCountMove +=1; 
+                                MatchMove.innerHTML = 'Match Move'+ ":" + matchedCountMove;
+
+                                
+                                if (matchedCount === numbers.length) {
+                                    alert('You are the winner');
+                                }
+                            } else {
+                                dismatchcount +=1; 
+                                dismatchcounts.innerHTML ="Total Moves" + ":" +  dismatchcount;
+                                first.classList.remove('boxOpen');
+                                second.classList.remove('boxOpen');
+                            }
+
+                            openBoxes = [];
+                        }, 500);
+                    }
+                }
+            };
+
+            flipboard.appendChild(box);
+        });
+
+       
+    </script>
+</body>
+</html>
